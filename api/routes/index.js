@@ -3,11 +3,11 @@ var router = express.Router();
 
 
 const paths = {
-  teQuiero: "/"
+  games: "/"
 }
 
 
-router.get(paths.teQuiero, function(req, res, next) {
+router.get(paths.games, function(req, res, next) {
   res.render('index', { title: 'Te Quiero' });
 });
 
