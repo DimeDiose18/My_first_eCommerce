@@ -1,12 +1,17 @@
 #!/usr/bin/env node
+const connectDB = require('./../database');
 
 /**
  * Module dependencies.
  */
 
+
 var app = require('../app');
-var debug = require('debug')('api:server');
 var http = require('http');
+
+
+/* Connect to the database*/
+connectDB()
 
 /**
  * Get port from environment and store in Express.
@@ -86,5 +91,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

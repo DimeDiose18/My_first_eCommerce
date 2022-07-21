@@ -1,14 +1,15 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-
+var axios = require("axios");
+var AllGames = require("./../models/AllGames");
 
 const paths = {
-  teQuiero: "/"
-}
+  getAllGames: "/",
+};
 
-
-router.get(paths.teQuiero, function(req, res, next) {
-  res.render('index', { title: 'Te Quiero' });
+router.get(paths.getAllGames, async function (req, res, next) {
+  const data = await AllGames.find()
+  res.send(data);
 });
 
 module.exports = router;
