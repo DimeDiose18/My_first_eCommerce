@@ -3,3 +3,7 @@
     min-height: 100vh;
     background-color: #153450;
 }
+.store_nav {
+    background: linear-gradient(90deg, rgba(10,164,238,1) 4%, rgba(3,155,246,1) 17%, rgba(10,123,191,1) 37%, rgba(21,61,138,1) 72%, rgba(14,24,129,1) 99%);
+    color: white;
+}
