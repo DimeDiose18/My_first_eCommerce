@@ -7,9 +7,7 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { withStyles } from "@material-ui/styles"
-import { ThemeProvider, createTheme } from "@mui/material/styles"
-import type {} from "@mui/lab/themeAugmentation"
+import { styled } from "@mui/material/styles";
 
 type Anchor = "left";
 
@@ -33,22 +31,23 @@ const Drawer = () => {
       setState({ ...state, [anchor]: open });
     };
 
-
   const list = (anchor: Anchor) => (
-   <Box
+    <Box
       sx={{ width: "auto" }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-    > 
+    >
       <List>
-        {["Iniciar sesión", "Tienda", "Comunidad", "Soporte"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {["Iniciar sesión", "Tienda", "Comunidad", "Soporte"].map(
+          (text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          )
+        )}
       </List>
       <Divider />
       <List>
@@ -63,44 +62,30 @@ const Drawer = () => {
     </Box>
   );
 
-  //Aquí pones los estilos 
-const StyleDrawer = withStyles ({
-    root: {
-        backgroundColor: "#171a2194",
-    },
-})(SwipeableDrawer);
+  //Aquí pones los estilos
+  const MySwipeableDrawer = styled(SwipeableDrawer)({
+      backgroundColor: "blue",
+  });
 
-
-const theme = createTheme({
-  components: {
-    SwipeableDrawer: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "yellow"
-        }
-      }
-    }
-  }
-})
   //
   return (
     <div>
       {(["left"] as const).map((anchor) => (
-        <ThemeProvider theme={theme}></ThemeProvider>
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <SwipeableDrawer
+          <MySwipeableDrawer
             anchor={anchor}
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
-            onOpen={toggleDrawer(anchor, true)}>
+            onOpen={toggleDrawer(anchor, true)}
+          >
             {list(anchor)}
-          </SwipeableDrawer>
+          </MySwipeableDrawer>
         </React.Fragment>
-        </ThemeProvider>)
-      ))};
+      ))}
+      ;
     </div>
   );
-}
+};
 
-export default Drawer; 
+export default Drawer;
