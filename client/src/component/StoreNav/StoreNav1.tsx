@@ -1,74 +1,66 @@
-import React from "react";
+import { height } from "@mui/system";
+import React, { useState } from "react";
 import styles from "./storeNav1.module.css";
 
-const StoreNav1 = () => {
+type Props = {
+  data: any;
+};
+const StoreNav1 = ({ data }: Props) => {
+  const [stylesHidden, setStylesHidden] = useState({
+    display: "none",
+  });
+  const [flag, setFlag] = useState(false);
+
+  const handleToggleOption = (e: any) => {
+    console.log(e.target.id);
+    setFlag(!flag);
+    flag
+      ? setStylesHidden({ display: "none" })
+      : setStylesHidden({ display: "block" });
+  };
   return (
-    <div>
-      <div className={styles.containerMenu}>
-        
-        <div className={styles.containerEnlaces}>
-          <div className={styles.opcion}>
-            <p> Tu tienda </p>
-          </div>
-          <div className={styles.enlace}>
-            <a href="#">Inicio</a>
-            <a href="#">Recomendaciones de la comunidad</a>
-            <a href="#">Vistos recientemente</a>
-          </div>
-        </div>
-
-        <div className={styles.containerEnlaces}>
-          <div className={styles.opcion}>
-            <p> Nuevo y destacable </p>
-          </div>
-          <div className={styles.enlace}>
-            <a href="#">Lo más descargado</a>
-            <a href="#">Novedades y tendencias</a>
-            <a href="#">Ofertas especiales</a>
-            <a href="#">Próximos lanzamientos especiales</a>
-          </div>
-        </div>
-
-        <div className={styles.containerEnlaces}>
-          <div className={styles.opcion}>
-            <p> Categorias </p>
-          </div>
-          <div className={styles.enlace}>
-            <a href="#">Free to Play</a>
-            <a href="#">Demos</a>
-            <a href="#">Bandas sonoras</a>
-            <a href="#">Títulos en RV</a>
-            <a href="#">
-              <strong>Géneros</strong>
-            </a>
-            <a href="#">Acción</a>
-            <a href="#">Aventura</a>
-            <a href="#">De rol</a>
-            <a href="#">Simulación</a>
-            <a href="#">Estrategia</a>
-            <a href="#">Deportes y carreras</a>
-            <a href="#">Temáticas</a>
-          </div>
-        </div>
-
-        <div className={styles.containerEnlaces}>
-          <div className={styles.opcion}>
-            <p> Tienda de puntos </p>
-          </div>
-        </div>
-
-        <div className={styles.containerEnlaces}>
-          <div className={styles.opcion}>
-            <p> Noticias </p>
-          </div>
-        </div>
-
-        <div className={styles.containerEnlaces}>
-          <div className={styles.opcion}>
-            <p> Laboratorio </p>
-          </div>
-        </div>
-      </div>
+    <div className={styles.containerMenu}>
+      {data?.map((e: any) => {
+        if (e.href) {
+          return (
+            <div className={styles.containerEnlaces}>
+              <div className={styles.opcion}>
+                <a key={e.title} href={e.href}>
+                  {e.title}
+                </a>
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div className={styles.containerEnlaces}>
+              <div className={styles.opcion}>
+                <p id={e.title} onClick={(e: any) => handleToggleOption(e)}>
+                  {e.title}
+                </p>
+              </div>
+              <div>
+                {e.enlaces?.map((element: any) => {
+                return (
+                  <div
+                    className={styles.enlace}
+                    style={{ display: stylesHidden.display }}
+                  >
+                    <a key={element.title} href={element.href}>
+                      {element.strong ? (
+                        <strong>{element.title}</strong>
+                      ) : (
+                        element.title
+                      )}
+                    </a>
+                  </div>
+                );
+              })}
+              </div>
+            </div>
+          );
+        }
+      })}
     </div>
   );
 };
