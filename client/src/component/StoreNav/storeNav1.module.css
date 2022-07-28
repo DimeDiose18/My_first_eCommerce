@@ -12,8 +12,6 @@
 /*Estilo de opciones*/
 
 .containerMenu .containerEnlaces .opcion {
-  display: flex;
-  justify-content: space-between;
   background: linear-gradient(
     90deg,
     rgba(224, 153, 204, 1) 1%,

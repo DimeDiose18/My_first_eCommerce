@@ -1,22 +1,26 @@
-import { height } from "@mui/system";
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./storeNav1.module.css";
 
 type Props = {
   data: any;
 };
 const StoreNav1 = ({ data }: Props) => {
-  const [stylesHidden, setStylesHidden] = useState({
-    display: "none",
-  });
   const [flag, setFlag] = useState(false);
 
   const handleToggleOption = (e: any) => {
-    console.log(e.target.id);
+    const links = [...e.view.document.links];
+    console.log("🚀 ~ file: StoreNav1.tsx ~ line 12 ~ handleToggleOption ~ links", links)
+    
+    links.forEach((element: any) => {
+      if (element.id && element.id === e.target.id) {
+        console.log("entra");
+        console.log(flag);
+        flag
+          ? element.style.setProperty("display", "none")
+          : element.style.setProperty("display", "block");
+      }
+    });
     setFlag(!flag);
-    flag
-      ? setStylesHidden({ display: "none" })
-      : setStylesHidden({ display: "block" });
   };
   return (
     <div className={styles.containerMenu}>
@@ -34,28 +38,29 @@ const StoreNav1 = ({ data }: Props) => {
         } else {
           return (
             <div className={styles.containerEnlaces}>
-              <div className={styles.opcion}>
-                <p id={e.title} onClick={(e: any) => handleToggleOption(e)}>
-                  {e.title}
-                </p>
+              <div
+                className={styles.opcion}
+                onClick={(e: any) => handleToggleOption(e)}
+              >
+                <p id={e.id}>{e.title}</p>
               </div>
-              <div>
+              <div className={styles.enlace}>
                 {e.enlaces?.map((element: any) => {
-                return (
-                  <div
-                    className={styles.enlace}
-                    style={{ display: stylesHidden.display }}
-                  >
-                    <a key={element.title} href={element.href}>
+                  return (
+                    <a
+                      style={{ display: "none" }}
+                      id={e.id}
+                      key={element.title}
+                      href={element.href}
+                    >
                       {element.strong ? (
                         <strong>{element.title}</strong>
                       ) : (
                         element.title
                       )}
                     </a>
-                  </div>
-                );
-              })}
+                  );
+                })}
               </div>
             </div>
           );

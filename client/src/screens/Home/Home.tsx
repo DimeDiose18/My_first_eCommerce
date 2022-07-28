@@ -8,6 +8,7 @@ const Home = () => {
   const storeNavData = [
     {
       title: "Tu tienda",
+      id: "tu_tienda",
       enlaces: [
         { title: "Inicio", href: "#" },
         { title: "Recomendaciones de la comunidad", href: "#" },
@@ -16,6 +17,7 @@ const Home = () => {
     },
     {
       title: "Nuevo y destacable",
+      id: "nuevo_y_destacable",
       enlaces: [
         { title: "Lo más descargado", href: "#" },
         { title: "Novedades y tendencias", href: "#" },
@@ -24,7 +26,8 @@ const Home = () => {
       ],
     },
     {
-      title: "Categorias",
+      title: "Categorías",
+      id: "categorias",
       enlaces: [
         { title: "Free to Play", href: "#" },
         { title: "Demos", href: "#" },
