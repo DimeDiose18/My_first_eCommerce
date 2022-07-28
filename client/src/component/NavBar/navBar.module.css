@@ -1,0 +1,25 @@
+nav {
+    background-color: #171a21;
+    box-shadow: 1px 1px 2px #1f232c8c ;
+    display: flex;
+    padding: 0 20px;
+    height: 60px;
+}
+
+.menu {
+width: 20px;
+height: 20px;
+display: block;
+margin-top: 16px;
+}
+.menu:hover {
+    cursor: pointer;
+}
+
+.navbar_logo {
+    display: flex;
+    margin: auto;
+}
+.img2 {
+    width: 100px;
+}
